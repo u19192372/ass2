@@ -13,7 +13,7 @@ let movies = [
         "runtime": "1Hr 52min", 
         "release_year": 2020, 
         "description": "Connected by phone in the same home but 20 years apart, a serial killer puts another woman's past -- and life -- on the line to change her own fate.", 
-        "poster_url":  document.appendChild(call), 
+        "poster_url": "./images/call.jpg", 
         "cinema_number": 1, 
         "ticket_price": 10, 
         "tickets_in_cart": 0 
@@ -95,6 +95,8 @@ function bookTicket(event) {
     var movieItem = button.parentElement.parentElement
     var title = movieItem.getElementsByClassName('movie-title')[0].innerText
     var price = movieItem.getElementsByClassName('movie-price')[0].innerText
+
+    
     
     addMovieToCart(title, price) 
     updateCart()
@@ -105,9 +107,16 @@ function addMovieToCart(title, price){
     cartRow.classList.add('cart-row')
     var cartItems = document.getElementsByClassName('cart-items')[0]
     var cartItemNames = cartItems.getElementsByClassName('cart-item-title')
+
+    let totalTicketNumber = document.getElementById("total-movies").innerHTML; // gets the current ticket count
+    totalTicketNumber++; // increases the ticket count by 1 
+    document.getElementById("total-movies").innerHTML = totalTicketNumber; // 
+    
     for (var i = 0; i < cartItemNames.length; i++) {
         if (cartItemNames[i].innerText == title) {
             alert('This movie is already in the cart')
+            totalTicketNumber--;
+            document.getElementById("total-movies").innerHTML = totalTicketNumber; //
             return
         }
     }
